@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRIDGENIX - Listas de Compra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="container mx-auto px-4 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <!-- LOGO CORREGIDO -->
+                <img src="logo.png" alt="Logo Fridgenix" class="h-10 w-auto group-hover:scale-105 transition-transform">
+                <span class="text-2xl font-black tracking-tighter text-blue-600">FRIDGENIX</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="registro.html" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">
+                    <i class="fa-regular fa-user mr-1"></i> Registro / Login
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-blue-600 text-white sticky top-20 z-40 shadow-md">
+        <div class="container mx-auto px-4 overflow-x-auto">
+            <ul class="flex items-center space-x-8 py-3 whitespace-nowrap">
+                <li><a href="index.html" class="hover:text-blue-200 transition-colors"><i class="fa-solid fa-house text-sm"></i> Inicio</a></li>
+                <li><a href="inventario.html" class="hover:text-blue-200 transition-colors">Mi Inventario</a></li>
+                <li><a href="recetas.html" class="hover:text-blue-200 transition-colors">Recetas Inteligentes</a></li>
+                <li><a href="listas.html" class="font-semibold border-b-2 border-white pb-1">Listas de Compra</a></li>
+                <li><a href="contacto.html" class="hover:text-blue-200 transition-colors">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8 flex-grow flex justify-center">
+        <div class="w-full max-w-2xl bg-white p-8 rounded-2xl shadow-md border-t-8 border-blue-500">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-3xl font-extrabold text-slate-800 mb-2">Lista de Supermercado 🛒</h1>
+                    <p class="text-slate-500 text-sm">Actualizada automáticamente según tu stock.</p>
+                </div>
+                <button onclick="alert('Compartiendo lista vía WhatsApp...')" class="text-blue-600 bg-blue-50 p-3 rounded-full hover:bg-blue-100 transition-colors" title="Compartir Lista">
+                    <i class="fa-solid fa-share-nodes text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- LE HEMOS AÑADIDO UN ID A LA LISTA PARA PODER METER COSAS DENTRO -->
+            <ul id="mi-lista-compra" class="space-y-3">
+                <li class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-blue-200 transition-colors">
+                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded cursor-pointer">
+                    <span class="text-lg font-medium text-slate-700 flex-grow">Mantequilla</span>
+                    <span class="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-1 rounded-md">Por receta</span>
+                </li>
+                <li class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-blue-200 transition-colors">
+                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded cursor-pointer">
+                    <span class="text-lg font-medium text-slate-700 flex-grow">Aceite de Oliva Virgen Extra</span>
+                    <span class="text-xs font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded-md">Bajo stock</span>
+                </li>
+            </ul>
+            
+            <!-- BOTÓN MODIFICADO QUE LLAMA A LA FUNCIÓN JAVASCRIPT -->
+            <button onclick="añadirProductoLista()" class="mt-8 w-full bg-slate-100 text-slate-700 border border-slate-300 font-bold py-3 rounded-xl hover:bg-slate-200 transition-colors shadow-sm">
+                <i class="fa-solid fa-plus mr-2"></i> Añadir producto manual
+            </button>
+        </div>
+    </main>
+
+    <!-- EL SCRIPT MÁGICO QUE AÑADE PRODUCTOS -->
+    <script>
+        function añadirProductoLista() {
+            // Pregunta al usuario el nombre del producto
+            let nuevoProducto = prompt("¿Qué producto quieres añadir a la lista?");
+            
+            // Si el usuario escribe algo y le da a Aceptar...
+            if (nuevoProducto && nuevoProducto.trim() !== "") {
+                // Buscamos la lista
+                let lista = document.getElementById("mi-lista-compra");
+                
+                // Creamos el nuevo elemento HTML (el <li>)
+                let elemento = document.createElement("li");
+                elemento.className = "flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-blue-200 transition-colors opacity-0";
+                
+                // Le metemos el texto y el diseño por dentro
+                elemento.innerHTML = `
+                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded cursor-pointer">
+                    <span class="text-lg font-medium text-slate-700 flex-grow">${nuevoProducto}</span>
+                    <span class="text-xs font-bold text-slate-500 bg-slate-200 px-2 py-1 rounded-md">Manual</span>
+                `;
+                
+                // Lo añadimos al final de la lista
+                lista.appendChild(elemento);
+                
+                // Pequeña animación para que aparezca suavemente
+                setTimeout(() => elemento.classList.remove("opacity-0"), 50);
+            }
+        }
+    </script>
+
+    <footer class="bg-slate-900 text-slate-300 pt-12 pb-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2026 FRIDGENIX S.L. | Av. de la Innovación 45, Córdoba | Tel: 900 123 456</p>
+        </div>
+    </footer>
+</body>
+</html>

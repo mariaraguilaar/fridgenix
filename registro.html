@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRIDGENIX - Registro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- CABECERA -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="container mx-auto px-4 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <img src="logo.png" alt="Logo Fridgenix" class="h-10 w-auto group-hover:scale-105 transition-transform">
+                <span class="text-2xl font-black tracking-tighter text-blue-600">FRIDGENIX</span>
+            </a>
+            <a href="index.html" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">Volver al Inicio</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 flex-grow flex justify-center items-center">
+        <div class="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full border border-slate-100 overflow-hidden relative">
+            
+            <!-- Barra de progreso -->
+            <div class="w-full bg-slate-200 h-2 rounded-full absolute top-0 left-0">
+                <div id="progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-500 w-1/2"></div>
+            </div>
+
+            <!-- ================= PASO 1: REGISTRO INDIVIDUAL ================= -->
+            <div id="paso-1" class="transition-all duration-500 mt-2">
+                <h1 class="text-2xl font-bold text-center mb-2 text-slate-800">Crea tu cuenta</h1>
+                <p class="text-center text-slate-500 text-sm mb-6">Paso 1: Datos personales</p>
+                
+                <form onsubmit="event.preventDefault(); irAlPaso2();">
+                    <div class="mb-4">
+                        <label class="block text-slate-600 text-sm font-bold mb-2">Nombre Completo</label>
+                        <input type="text" required placeholder="Ej: Carlos Pérez" class="w-full bg-slate-50 border border-slate-200 rounded-lg py-3 px-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-slate-600 text-sm font-bold mb-2">Correo Electrónico</label>
+                        <input type="email" required placeholder="carlos@email.com" class="w-full bg-slate-50 border border-slate-200 rounded-lg py-3 px-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-slate-600 text-sm font-bold mb-2">Contraseña</label>
+                        <input type="password" required placeholder="••••••••" class="w-full bg-slate-50 border border-slate-200 rounded-lg py-3 px-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition shadow-md">
+                        Siguiente paso <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- ================= PASO 2: CONFIGURACIÓN DE FAMILIA ================= -->
+            <div id="paso-2" class="hidden transition-all duration-500 mt-2">
+                <button onclick="volverAlPaso1()" class="text-slate-400 hover:text-blue-600 mb-4 text-sm font-medium transition-colors">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Volver
+                </button>
+                <h1 class="text-2xl font-bold text-center mb-2 text-slate-800">Configura tu hogar</h1>
+                <p class="text-center text-slate-500 text-sm mb-6">Paso 2: Familia e Inventario</p>
+                
+                <!-- Selector de opciones -->
+                <div class="flex gap-2 mb-6 p-1 bg-slate-100 rounded-lg">
+                    <button id="btn-crear" onclick="cambiarModo('crear')" class="flex-1 py-2 text-sm font-bold bg-white text-blue-600 rounded shadow-sm transition-all">Crear familia</button>
+                    <button id="btn-unirse" onclick="cambiarModo('unirse')" class="flex-1 py-2 text-sm font-bold text-slate-500 hover:text-slate-700 transition-all">Unirse a familia</button>
+                </div>
+
+                <form onsubmit="event.preventDefault(); finalizarRegistro();">
+                    
+                    <!-- Opción A: Crear Familia -->
+                    <div id="form-crear" class="block">
+                        <div class="mb-4">
+                            <label class="block text-slate-600 text-sm font-bold mb-2">Nombre de la Familia/Hogar</label>
+                            <input type="text" placeholder="Ej: Familia Pérez o Piso Estudiantes" class="w-full bg-slate-50 border border-slate-200 rounded-lg py-3 px-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-slate-600 text-sm font-bold mb-2">¿Alguna intolerancia en casa?</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="flex items-center gap-2 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
+                                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded"> <span class="text-sm font-medium">Sin Gluten</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
+                                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded"> <span class="text-sm font-medium">Sin Lactosa</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
+                                    <input type="checkbox" class="w-4 h-4 text-blue-600 rounded"> <span class="text-sm font-medium">Vegano</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Opción B: Unirse a Familia -->
+                    <div id="form-unirse" class="hidden">
+                        <div class="mb-6">
+                            <label class="block text-slate-600 text-sm font-bold mb-2">Código de invitación</label>
+                            <p class="text-xs text-slate-500 mb-2">Pídele a un miembro de tu familia que te comparta el código de la nevera.</p>
+                            <input type="text" placeholder="Ej: FRIDG-A8F2" class="w-full bg-slate-50 border border-slate-200 rounded-lg py-3 px-4 font-mono text-center tracking-widest uppercase focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-green-500 text-white font-bold py-3 rounded-xl hover:bg-green-600 transition shadow-md flex justify-center items-center gap-2">
+                        <i class="fa-solid fa-check"></i> Finalizar Registro
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- SCRIPT MÁGICO PARA CONTROLAR LOS PASOS -->
+    <script>
+        function irAlPaso2() {
+            document.getElementById('paso-1').classList.add('hidden');
+            document.getElementById('paso-2').classList.remove('hidden');
+            document.getElementById('progress-bar').style.width = '100%';
+        }
+
+        function volverAlPaso1() {
+            document.getElementById('paso-2').classList.add('hidden');
+            document.getElementById('paso-1').classList.remove('hidden');
+            document.getElementById('progress-bar').style.width = '50%';
+        }
+
+        function cambiarModo(modo) {
+            let btnCrear = document.getElementById('btn-crear');
+            let btnUnirse = document.getElementById('btn-unirse');
+            let formCrear = document.getElementById('form-crear');
+            let formUnirse = document.getElementById('form-unirse');
+
+            if (modo === 'crear') {
+                // Estilos botones
+                btnCrear.className = "flex-1 py-2 text-sm font-bold bg-white text-blue-600 rounded shadow-sm transition-all";
+                btnUnirse.className = "flex-1 py-2 text-sm font-bold text-slate-500 hover:text-slate-700 transition-all bg-transparent";
+                // Mostrar formularios
+                formCrear.classList.remove('hidden');
+                formUnirse.classList.add('hidden');
+            } else {
+                // Estilos botones
+                btnUnirse.className = "flex-1 py-2 text-sm font-bold bg-white text-blue-600 rounded shadow-sm transition-all";
+                btnCrear.className = "flex-1 py-2 text-sm font-bold text-slate-500 hover:text-slate-700 transition-all bg-transparent";
+                // Mostrar formularios
+                formUnirse.classList.remove('hidden');
+                formCrear.classList.add('hidden');
+            }
+        }
+
+        function finalizarRegistro() {
+            alert('¡Cuenta configurada con éxito! Bienvenido al control inteligente de tu nevera.');
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>

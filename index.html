@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRIDGENIX - Inicio</title>
+    <!-- Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para los iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- CABECERA PRINCIPAL -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="container mx-auto px-4 h-20 flex items-center justify-between">
+            
+            <!-- Zona del Logo -->
+            <a href="index.html" class="flex items-center gap-2 group">
+                <img src="logo.png" alt="Logo Fridgenix" class="h-10 w-auto group-hover:scale-105 transition-transform">
+                <span class="text-2xl font-black tracking-tighter text-blue-600">FRIDGENIX</span>
+            </a>
+
+            <!-- Buscador -->
+            <div class="hidden md:flex flex-1 max-w-md mx-8">
+                <div class="relative w-full">
+                    <input type="text" placeholder="Buscar alimentos, recetas..." class="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 outline-none focus:ring-2 focus:ring-blue-400 transition-all">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400"></i>
+                </div>
+            </div>
+
+            <!-- Login / Registro -->
+            <div class="flex items-center gap-4">
+                <a href="registro.html" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">
+                    <i class="fa-regular fa-user mr-1"></i> Registro / Login
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MENÚ DE NAVEGACIÓN PRINCIPAL -->
+    <nav class="bg-blue-600 text-white sticky top-20 z-40 shadow-md">
+        <div class="container mx-auto px-4 overflow-x-auto">
+            <ul class="flex items-center space-x-8 py-3 whitespace-nowrap">
+                <li><a href="index.html" class="font-semibold border-b-2 border-white pb-1"><i class="fa-solid fa-house text-sm"></i> Inicio</a></li>
+                <li><a href="inventario.html" class="hover:text-blue-200 transition-colors">Mi Inventario</a></li>
+                <li><a href="recetas.html" class="hover:text-blue-200 transition-colors">Recetas Inteligentes</a></li>
+                <li><a href="listas.html" class="hover:text-blue-200 transition-colors">Listas de Compra</a></li>
+                <li><a href="contacto.html" class="hover:text-blue-200 transition-colors">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        <div class="flex flex-col md:flex-row gap-8">
+            
+            <!-- Columna Izquierda: Menú Secundario / Categorías -->
+            <aside class="w-full md:w-1/4 lg:w-1/5">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 sticky top-40">
+                    <h3 class="text-lg font-bold mb-4 text-slate-700 flex items-center gap-2">
+                        <i class="fa-solid fa-filter text-blue-500"></i> Categorías
+                    </h3>
+                    <ul class="space-y-1">
+                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">🥛 Lácteos</a></li>
+                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">🥩 Carnes</a></li>
+                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">🐟 Pescados</a></li>
+                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">🥦 Verduras</a></li>
+                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">🍎 Frutas</a></li>
+                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">📦 Despensa</a></li>
+                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">❄️ Congelados</a></li>
+                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">🧃 Bebidas</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Columna Derecha: Contenido y Alertas -->
+            <section class="w-full md:w-3/4 lg:w-4/5">
+                
+                <!-- Título de la página -->
+                <div class="mb-8">
+                    <h1 class="text-3xl font-extrabold text-slate-800">Resumen de tu Nevera</h1>
+                    <p class="text-slate-500">Tienes 24 artículos en total. 2 necesitan tu atención prioritaria.</p>
+                </div>
+                
+                <!-- Banner Premium -->
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-8 rounded-3xl shadow-xl mb-10 overflow-hidden relative">
+                    <div class="relative z-10">
+                        <h2 class="text-2xl font-bold mb-2">¡Pásate a FRIDGENIX Premium!</h2>
+                        <p class="mb-6 text-blue-100 max-w-md">Desbloquea recetas personalizadas y listas automáticas por solo 2,99€/mes.</p>
+                        <a href="premium.html" class="inline-block bg-white text-blue-700 px-6 py-3 rounded-full font-bold hover:bg-blue-50 shadow-lg transition-transform hover:scale-105">
+                            Obtener Premium ahora
+                        </a>
+                    </div>
+                    <!-- Decoración del banner -->
+                    <div class="absolute -right-10 -top-10 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+                </div>
+
+                <!-- Sección de Alertas de Caducidad -->
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Alertas de Caducidad
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Tarjeta Alerta 1 -->
+                    <div class="bg-white border-l-4 border-red-500 p-5 rounded-r-xl shadow-sm hover:shadow-md transition-shadow flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="text-3xl">🥛</div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Leche entera</h4>
+                                <p class="text-sm text-red-600 font-medium">Caduca hoy</p>
+                            </div>
+                        </div>
+                        <button onclick="alert('¡Producto marcado como consumido! Se ha eliminado de tu inventario.')" class="text-slate-400 hover:text-green-500 transition-colors">
+                            <i class="fa-solid fa-circle-check text-2xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Tarjeta Alerta 2 -->
+                    <div class="bg-white border-l-4 border-amber-400 p-5 rounded-r-xl shadow-sm hover:shadow-md transition-shadow flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="text-3xl">🍗</div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Pechuga de pollo</h4>
+                                <p class="text-sm text-amber-600 font-medium">Caduca en 2 días</p>
+                            </div>
+                        </div>
+                        <button onclick="alert('¡Producto marcado como consumido! Se ha eliminado de tu inventario.')" class="text-slate-400 hover:text-green-500 transition-colors">
+                            <i class="fa-solid fa-circle-check text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- PIE DE PÁGINA (FOOTER) -->
+    <footer class="bg-slate-900 text-slate-300 pt-12 pb-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2026 FRIDGENIX S.L. | Av. de la Innovación 45, Córdoba | Tel: 900 123 456</p>
+        </div>
+    </footer>
+
+</body>
+</html>

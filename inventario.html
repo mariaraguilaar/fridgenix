@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRIDGENIX - Mi Inventario</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+    
+    <!-- CABECERA PRINCIPAL -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="container mx-auto px-4 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <span class="text-4xl group-hover:scale-110 transition-transform">🧊</span>
+                <span class="text-2xl font-black tracking-tighter text-blue-600">FRIDGENIX</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="registro.html" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">
+                    <i class="fa-regular fa-user mr-1"></i> Registro / Login
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MENÚ DE NAVEGACIÓN PRINCIPAL -->
+    <nav class="bg-blue-600 text-white sticky top-20 z-40 shadow-md">
+        <div class="container mx-auto px-4 overflow-x-auto">
+            <ul class="flex items-center space-x-8 py-3 whitespace-nowrap">
+                <li><a href="index.html" class="hover:text-blue-200 transition-colors"><i class="fa-solid fa-house text-sm"></i> Inicio</a></li>
+                <li><a href="inventario.html" class="font-semibold border-b-2 border-white pb-1">Mi Inventario</a></li>
+                <li><a href="recetas.html" class="hover:text-blue-200 transition-colors">Recetas Inteligentes</a></li>
+                <li><a href="listas.html" class="hover:text-blue-200 transition-colors">Listas de Compra</a></li>
+                <li><a href="contacto.html" class="hover:text-blue-200 transition-colors">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div>
+                <h1 class="text-3xl font-extrabold text-slate-800">Inventario Completo</h1>
+                <p class="text-slate-500">Gestiona todos los alimentos de tu hogar.</p>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="alert('Abriendo formulario de inserción manual...')" class="bg-slate-200 text-slate-700 px-4 py-2 rounded-lg font-bold hover:bg-slate-300 transition-colors shadow-sm">
+                    <i class="fa-solid fa-plus mr-1"></i> Manual
+                </button>
+                <button onclick="alert('Abriendo cámara del dispositivo para escanear código de barras...')" class="bg-green-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-green-600 transition-colors shadow-md">
+                    <i class="fa-solid fa-barcode mr-1"></i> Escanear Producto
+                </button>
+            </div>
+        </div>
+
+        <!-- CUADRÍCULA EXTENSA -->
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            <div class="bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center hover:shadow-md transition-shadow">
+                <div class="text-5xl mb-4">🍎</div><h3 class="font-bold text-slate-800">Manzanas Fuji</h3><p class="text-sm text-slate-500">6 uds</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-t-4 border-amber-400 shadow-sm text-center hover:shadow-md transition-shadow">
+                <div class="text-5xl mb-4">🧀</div><h3 class="font-bold text-slate-800">Queso Curado</h3><p class="text-sm text-slate-500">300g <span class="text-amber-500 font-medium block">Cad. pronto</span></p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-t-4 border-red-500 shadow-sm text-center hover:shadow-md transition-shadow">
+                <div class="text-5xl mb-4">🥛</div><h3 class="font-bold text-slate-800">Leche Entera</h3><p class="text-sm text-slate-500">1 L <span class="text-red-500 font-medium block">Caduca hoy</span></p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center hover:shadow-md transition-shadow">
+                <div class="text-5xl mb-4">🥩</div><h3 class="font-bold text-slate-800">Ternera</h3><p class="text-sm text-slate-500">500g</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center hover:shadow-md transition-shadow">
+                <div class="text-5xl mb-4">🥚</div><h3 class="font-bold text-slate-800">Huevos XL</h3><p class="text-sm text-slate-500">10 uds</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center hover:shadow-md transition-shadow">
+                <div class="text-5xl mb-4">🍅</div><h3 class="font-bold text-slate-800">Tomates Rama</h3><p class="text-sm text-slate-500">4 uds</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-t-4 border-slate-300 shadow-sm text-center hover:shadow-md transition-shadow">
+                <div class="text-5xl mb-4">🥫</div><h3 class="font-bold text-slate-800">Tomate Frito</h3><p class="text-sm text-slate-500">2 latas</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-t-4 border-amber-400 shadow-sm text-center hover:shadow-md transition-shadow">
+                <div class="text-5xl mb-4">🍞</div><h3 class="font-bold text-slate-800">Pan de Molde</h3><p class="text-sm text-slate-500">1/2 bolsa</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center hover:shadow-md transition-shadow">
+                <div class="text-5xl mb-4">🐟</div><h3 class="font-bold text-slate-800">Salmón</h3><p class="text-sm text-slate-500">2 lomos (Congelado)</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-t-4 border-slate-300 shadow-sm text-center hover:shadow-md transition-shadow">
+                <div class="text-5xl mb-4">🍝</div><h3 class="font-bold text-slate-800">Macarrones</h3><p class="text-sm text-slate-500">1 paquete</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- PIE DE PÁGINA (FOOTER) -->
+    <footer class="bg-slate-900 text-slate-300 pt-12 pb-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2026 FRIDGENIX S.L. | Av. de la Innovación 45, Córdoba | Tel: 900 123 456</p>
+        </div>
+    </footer>
+</body>
+</html>
