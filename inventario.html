@@ -3,101 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FRIDGENIX - Mi Inventario</title>
+    <title>FRIDGENIX - Inventario</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-    </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
-    
-    <!-- CABECERA PRINCIPAL -->
+
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div class="container mx-auto px-4 h-20 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-2 group">
-                <span class="text-4xl group-hover:scale-110 transition-transform">🧊</span>
-                <span class="text-2xl font-black tracking-tighter text-blue-600">FRIDGENIX</span>
+                <img src="logo.png" alt="Logo" class="h-10 w-auto group-hover:scale-105 transition-transform">
+                <span class="text-2xl font-black text-blue-600">FRIDGENIX</span>
             </a>
-            <div class="flex items-center gap-4">
-                <a href="registro.html" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">
-                    <i class="fa-regular fa-user mr-1"></i> Registro / Login
-                </a>
+            <div class="hidden md:flex flex-1 max-w-md mx-8">
+                <div class="relative w-full">
+                    <input type="text" id="buscador-inv" onkeyup="filtrarInventario()" placeholder="Filtrar inventario..." class="w-full bg-slate-100 rounded-full py-2 pl-10 pr-4 outline-none focus:ring-2 focus:ring-blue-400">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400"></i>
+                </div>
             </div>
+            <a href="registro.html" class="text-slate-600 font-medium">Login</a>
         </div>
     </header>
 
-    <!-- MENÚ DE NAVEGACIÓN PRINCIPAL -->
-    <nav class="bg-blue-600 text-white sticky top-20 z-40 shadow-md">
+    <nav class="bg-blue-600 text-white shadow-md">
         <div class="container mx-auto px-4 overflow-x-auto">
-            <ul class="flex items-center space-x-8 py-3 whitespace-nowrap">
-                <li><a href="index.html" class="hover:text-blue-200 transition-colors"><i class="fa-solid fa-house text-sm"></i> Inicio</a></li>
+            <ul class="flex space-x-8 py-3 whitespace-nowrap">
+                <li><a href="index.html" class="hover:text-blue-200">Inicio</a></li>
                 <li><a href="inventario.html" class="font-semibold border-b-2 border-white pb-1">Mi Inventario</a></li>
-                <li><a href="recetas.html" class="hover:text-blue-200 transition-colors">Recetas Inteligentes</a></li>
-                <li><a href="listas.html" class="hover:text-blue-200 transition-colors">Listas de Compra</a></li>
-                <li><a href="contacto.html" class="hover:text-blue-200 transition-colors">Contacto</a></li>
+                <li><a href="recetas.html" class="hover:text-blue-200">Recetas</a></li>
+                <li><a href="listas.html" class="hover:text-blue-200">Listas</a></li>
+                <li><a href="estadisticas.html" class="hover:text-blue-200">Estadísticas</a></li>
+                <li><a href="contacto.html" class="hover:text-blue-200">Contacto</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <main class="container mx-auto px-4 py-8 flex-grow">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-            <div>
-                <h1 class="text-3xl font-extrabold text-slate-800">Inventario Completo</h1>
-                <p class="text-slate-500">Gestiona todos los alimentos de tu hogar.</p>
-            </div>
-            <div class="flex gap-2">
-                <button onclick="alert('Abriendo formulario de inserción manual...')" class="bg-slate-200 text-slate-700 px-4 py-2 rounded-lg font-bold hover:bg-slate-300 transition-colors shadow-sm">
-                    <i class="fa-solid fa-plus mr-1"></i> Manual
-                </button>
-                <button onclick="alert('Abriendo cámara del dispositivo para escanear código de barras...')" class="bg-green-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-green-600 transition-colors shadow-md">
-                    <i class="fa-solid fa-barcode mr-1"></i> Escanear Producto
-                </button>
+            <h1 class="text-3xl font-extrabold">Inventario Completo</h1>
+            <div class="flex gap-2 flex-wrap">
+                <button onclick="añadirManual()" class="bg-white border-2 border-slate-300 px-4 py-2 rounded-lg font-bold hover:bg-slate-100 transition-colors shadow-sm"><i class="fa-solid fa-plus mr-2"></i> Añadir Manual</button>
+                <button onclick="escanearProducto()" class="bg-green-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-green-600 transition-colors shadow-sm"><i class="fa-solid fa-barcode mr-2"></i> Escanear</button>
             </div>
         </div>
 
-        <!-- CUADRÍCULA EXTENSA -->
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            <div class="bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center hover:shadow-md transition-shadow">
-                <div class="text-5xl mb-4">🍎</div><h3 class="font-bold text-slate-800">Manzanas Fuji</h3><p class="text-sm text-slate-500">6 uds</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl border-t-4 border-amber-400 shadow-sm text-center hover:shadow-md transition-shadow">
-                <div class="text-5xl mb-4">🧀</div><h3 class="font-bold text-slate-800">Queso Curado</h3><p class="text-sm text-slate-500">300g <span class="text-amber-500 font-medium block">Cad. pronto</span></p>
-            </div>
-            <div class="bg-white p-6 rounded-xl border-t-4 border-red-500 shadow-sm text-center hover:shadow-md transition-shadow">
-                <div class="text-5xl mb-4">🥛</div><h3 class="font-bold text-slate-800">Leche Entera</h3><p class="text-sm text-slate-500">1 L <span class="text-red-500 font-medium block">Caduca hoy</span></p>
-            </div>
-            <div class="bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center hover:shadow-md transition-shadow">
-                <div class="text-5xl mb-4">🥩</div><h3 class="font-bold text-slate-800">Ternera</h3><p class="text-sm text-slate-500">500g</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center hover:shadow-md transition-shadow">
-                <div class="text-5xl mb-4">🥚</div><h3 class="font-bold text-slate-800">Huevos XL</h3><p class="text-sm text-slate-500">10 uds</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center hover:shadow-md transition-shadow">
-                <div class="text-5xl mb-4">🍅</div><h3 class="font-bold text-slate-800">Tomates Rama</h3><p class="text-sm text-slate-500">4 uds</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl border-t-4 border-slate-300 shadow-sm text-center hover:shadow-md transition-shadow">
-                <div class="text-5xl mb-4">🥫</div><h3 class="font-bold text-slate-800">Tomate Frito</h3><p class="text-sm text-slate-500">2 latas</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl border-t-4 border-amber-400 shadow-sm text-center hover:shadow-md transition-shadow">
-                <div class="text-5xl mb-4">🍞</div><h3 class="font-bold text-slate-800">Pan de Molde</h3><p class="text-sm text-slate-500">1/2 bolsa</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center hover:shadow-md transition-shadow">
-                <div class="text-5xl mb-4">🐟</div><h3 class="font-bold text-slate-800">Salmón</h3><p class="text-sm text-slate-500">2 lomos (Congelado)</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl border-t-4 border-slate-300 shadow-sm text-center hover:shadow-md transition-shadow">
-                <div class="text-5xl mb-4">🍝</div><h3 class="font-bold text-slate-800">Macarrones</h3><p class="text-sm text-slate-500">1 paquete</p>
-            </div>
+        <p id="msg-vacio" class="hidden text-slate-500 text-center mb-4 bg-slate-100 p-4 rounded-lg">No se encontraron productos con ese nombre.</p>
+
+        <div id="grid-inventario" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+            <!-- Lácteos -->
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-blue-300 shadow-sm text-center" data-nom="leche entera"><div class="text-5xl mb-4">🥛</div><h3 class="font-bold text-lg">Leche Entera</h3><p class="text-sm text-slate-500">1L</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-yellow-400 shadow-sm text-center" data-nom="queso cheddar"><div class="text-5xl mb-4">🧀</div><h3 class="font-bold text-lg">Queso Cheddar</h3><p class="text-sm text-slate-500">200g</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-blue-300 shadow-sm text-center" data-nom="yogur griego"><div class="text-5xl mb-4">🍦</div><h3 class="font-bold text-lg">Yogur Griego</h3><p class="text-sm text-slate-500">Pack 4</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-yellow-400 shadow-sm text-center" data-nom="mantequilla"><div class="text-5xl mb-4">🧈</div><h3 class="font-bold text-lg">Mantequilla</h3><p class="text-sm text-slate-500">250g</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-blue-300 shadow-sm text-center" data-nom="nata para cocinar"><div class="text-5xl mb-4">🥛</div><h3 class="font-bold text-lg">Nata Cocinar</h3><p class="text-sm text-slate-500">200ml</p></div>
+
+            <!-- Carnes -->
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-red-400 shadow-sm text-center" data-nom="pechuga de pollo"><div class="text-5xl mb-4">🍗</div><h3 class="font-bold text-lg">Pechuga Pollo</h3><p class="text-sm text-slate-500">500g</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-red-400 shadow-sm text-center" data-nom="filete de ternera"><div class="text-5xl mb-4">🥩</div><h3 class="font-bold text-lg">Filete Ternera</h3><p class="text-sm text-slate-500">2 uds</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-red-400 shadow-sm text-center" data-nom="salchichas"><div class="text-5xl mb-4">🌭</div><h3 class="font-bold text-lg">Salchichas</h3><p class="text-sm text-slate-500">Pack 6</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-red-400 shadow-sm text-center" data-nom="chuletas de cerdo"><div class="text-5xl mb-4">🐷</div><h3 class="font-bold text-lg">Chuletas Cerdo</h3><p class="text-sm text-slate-500">4 uds</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-red-400 shadow-sm text-center" data-nom="pavo molido"><div class="text-5xl mb-4">🦃</div><h3 class="font-bold text-lg">Pavo Molido</h3><p class="text-sm text-slate-500">300g</p></div>
+
+            <!-- Pescados -->
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-cyan-400 shadow-sm text-center" data-nom="salmon fresco"><div class="text-5xl mb-4">🐟</div><h3 class="font-bold text-lg">Salmón Fresco</h3><p class="text-sm text-slate-500">300g</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-cyan-400 shadow-sm text-center" data-nom="gambas"><div class="text-5xl mb-4">🦐</div><h3 class="font-bold text-lg">Gambas</h3><p class="text-sm text-slate-500">250g</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-cyan-400 shadow-sm text-center" data-nom="merluza"><div class="text-5xl mb-4">🐠</div><h3 class="font-bold text-lg">Merluza</h3><p class="text-sm text-slate-500">2 rodajas</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-cyan-400 shadow-sm text-center" data-nom="atun en lata"><div class="text-5xl mb-4">🥫</div><h3 class="font-bold text-lg">Atún Lata</h3><p class="text-sm text-slate-500">3 uds</p></div>
+
+            <!-- Verduras -->
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center" data-nom="tomates"><div class="text-5xl mb-4">🍅</div><h3 class="font-bold text-lg">Tomates</h3><p class="text-sm text-slate-500">6 uds</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center" data-nom="lechuga"><div class="text-5xl mb-4">🥬</div><h3 class="font-bold text-lg">Lechuga</h3><p class="text-sm text-slate-500">1 ud</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center" data-nom="espinacas"><div class="text-5xl mb-4">🌿</div><h3 class="font-bold text-lg">Espinacas</h3><p class="text-sm text-slate-500">Bolsa</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-orange-400 shadow-sm text-center" data-nom="zanahorias"><div class="text-5xl mb-4">🥕</div><h3 class="font-bold text-lg">Zanahorias</h3><p class="text-sm text-slate-500">1kg</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-purple-400 shadow-sm text-center" data-nom="cebolla"><div class="text-5xl mb-4">🧅</div><h3 class="font-bold text-lg">Cebolla</h3><p class="text-sm text-slate-500">4 uds</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center" data-nom="pimiento rojo"><div class="text-5xl mb-4">🫑</div><h3 class="font-bold text-lg">Pimiento Rojo</h3><p class="text-sm text-slate-500">2 uds</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-green-500 shadow-sm text-center" data-nom="brocoli"><div class="text-5xl mb-4">🥦</div><h3 class="font-bold text-lg">Brócoli</h3><p class="text-sm text-slate-500">1 ud</p></div>
+
+            <!-- Frutas -->
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-yellow-300 shadow-sm text-center" data-nom="platanos"><div class="text-5xl mb-4">🍌</div><h3 class="font-bold text-lg">Plátanos</h3><p class="text-sm text-slate-500">5 uds</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-red-300 shadow-sm text-center" data-nom="manzanas"><div class="text-5xl mb-4">🍎</div><h3 class="font-bold text-lg">Manzanas</h3><p class="text-sm text-slate-500">6 uds</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-red-500 shadow-sm text-center" data-nom="fresas"><div class="text-5xl mb-4">🍓</div><h3 class="font-bold text-lg">Fresas</h3><p class="text-sm text-slate-500">500g</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-green-400 shadow-sm text-center" data-nom="kiwis"><div class="text-5xl mb-4">🥝</div><h3 class="font-bold text-lg">Kiwis</h3><p class="text-sm text-slate-500">4 uds</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-orange-500 shadow-sm text-center" data-nom="naranjas"><div class="text-5xl mb-4">🍊</div><h3 class="font-bold text-lg">Naranjas</h3><p class="text-sm text-slate-500">2kg</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-purple-500 shadow-sm text-center" data-nom="uvas"><div class="text-5xl mb-4">🍇</div><h3 class="font-bold text-lg">Uvas</h3><p class="text-sm text-slate-500">1kg</p></div>
+
+            <!-- Bebidas -->
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-sky-400 shadow-sm text-center" data-nom="zumo de naranja"><div class="text-5xl mb-4">🧃</div><h3 class="font-bold text-lg">Zumo Naranja</h3><p class="text-sm text-slate-500">1L</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-sky-400 shadow-sm text-center" data-nom="leche de almendras"><div class="text-5xl mb-4">🥛</div><h3 class="font-bold text-lg">Leche Almendras</h3><p class="text-sm text-slate-500">1L</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-amber-400 shadow-sm text-center" data-nom="cerveza"><div class="text-5xl mb-4">🍺</div><h3 class="font-bold text-lg">Cerveza</h3><p class="text-sm text-slate-500">6 pack</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-sky-400 shadow-sm text-center" data-nom="agua mineral"><div class="text-5xl mb-4">💧</div><h3 class="font-bold text-lg">Agua Mineral</h3><p class="text-sm text-slate-500">5L</p></div>
+
+            <!-- Congelados -->
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-slate-400 shadow-sm text-center" data-nom="pizza congelada"><div class="text-5xl mb-4">🍕</div><h3 class="font-bold text-lg">Pizza Cong.</h3><p class="text-sm text-slate-500">2 uds</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-slate-400 shadow-sm text-center" data-nom="guisantes"><div class="text-5xl mb-4">🟢</div><h3 class="font-bold text-lg">Guisantes</h3><p class="text-sm text-slate-500">Bolsa</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-slate-400 shadow-sm text-center" data-nom="helado"><div class="text-5xl mb-4">🍨</div><h3 class="font-bold text-lg">Helado</h3><p class="text-sm text-slate-500">1L</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-slate-400 shadow-sm text-center" data-nom="patatas fritas congeladas"><div class="text-5xl mb-4">🍟</div><h3 class="font-bold text-lg">Patatas Cong.</h3><p class="text-sm text-slate-500">Bolsa</p></div>
+
+            <!-- Panadería -->
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-amber-300 shadow-sm text-center" data-nom="pan de molde"><div class="text-5xl mb-4">🍞</div><h3 class="font-bold text-lg">Pan Molde</h3><p class="text-sm text-slate-500">1 paquete</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-amber-300 shadow-sm text-center" data-nom="croissants"><div class="text-5xl mb-4">🥐</div><h3 class="font-bold text-lg">Croissants</h3><p class="text-sm text-slate-500">4 uds</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-amber-300 shadow-sm text-center" data-nom="baguette"><div class="text-5xl mb-4">🥖</div><h3 class="font-bold text-lg">Baguette</h3><p class="text-sm text-slate-500">1 ud</p></div>
+
+            <!-- Salsas -->
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-red-300 shadow-sm text-center" data-nom="ketchup"><div class="text-5xl mb-4">🍅</div><h3 class="font-bold text-lg">Ketchup</h3><p class="text-sm text-slate-500">500ml</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-yellow-200 shadow-sm text-center" data-nom="mayonesa"><div class="text-5xl mb-4">🫙</div><h3 class="font-bold text-lg">Mayonesa</h3><p class="text-sm text-slate-500">450ml</p></div>
+
+            <!-- Snacks -->
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-yellow-500 shadow-sm text-center" data-nom="patatas fritas"><div class="text-5xl mb-4">🍟</div><h3 class="font-bold text-lg">Patatas Fritas</h3><p class="text-sm text-slate-500">Bolsa</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-yellow-500 shadow-sm text-center" data-nom="frutos secos"><div class="text-5xl mb-4">🥜</div><h3 class="font-bold text-lg">Frutos Secos</h3><p class="text-sm text-slate-500">250g</p></div>
+            <div class="prod-card bg-white p-6 rounded-xl border-t-4 border-yellow-500 shadow-sm text-center" data-nom="galletas"><div class="text-5xl mb-4">🍪</div><h3 class="font-bold text-lg">Galletas</h3><p class="text-sm text-slate-500">Paquete</p></div>
         </div>
     </main>
 
-    <!-- PIE DE PÁGINA (FOOTER) -->
-    <footer class="bg-slate-900 text-slate-300 pt-12 pb-6 mt-12">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2026 FRIDGENIX S.L. | Av. de la Innovación 45, Córdoba | Tel: 900 123 456</p>
-        </div>
-    </footer>
+    <script>
+        function añadirManual() {
+            let nombre = prompt("Introduce el nombre del producto:");
+            if(nombre && nombre.trim() !== "") { 
+                crearTarjeta("📦", nombre.trim(), "Recién añadido", "border-slate-400"); 
+            }
+        }
+
+        function escanearProducto() {
+            let productos = ["Leche Semi", "Pan Integral", "Tomate Frito", "Pizza Congelada", "Huevos XL", "Aceitunas", "Salsa de Soja", "Nuggets de Pollo"];
+            let aleatorio = productos[Math.floor(Math.random() * productos.length)];
+            alert(`📸 ¡Bip! Código detectado: **${aleatorio}**`);
+            crearTarjeta("🏷️", aleatorio, "Escaneado ahora", "border-cyan-400");
+        }
+
+        function crearTarjeta(emoji, titulo, desc, borde) {
+            let grid = document.getElementById('grid-inventario');
+            let div = document.createElement('div');
+            div.className = `prod-card bg-white p-6 rounded-xl border-t-4 ${borde} shadow-sm text-center transform scale-0 transition-transform duration-300`;
+            div.setAttribute('data-nom', titulo.toLowerCase());
+            div.innerHTML = `<div class="text-5xl mb-4">${emoji}</div><h3 class="font-bold text-lg">${titulo}</h3><p class="text-sm text-slate-500">${desc}</p>`;
+            grid.insertBefore(div, grid.firstChild);
+            setTimeout(() => div.classList.remove('scale-0'), 50);
+            document.getElementById('msg-vacio').style.display = 'none';
+        }
+
+        function filtrarInventario() {
+            let txt = document.getElementById('buscador-inv').value.toLowerCase().trim();
+            let cards = document.querySelectorAll('.prod-card');
+            let visibles = 0;
+            cards.forEach(c => {
+                if(c.getAttribute('data-nom').includes(txt)){ c.style.display = 'block'; visibles++; } 
+                else { c.style.display = 'none'; }
+            });
+            document.getElementById('msg-vacio').style.display = visibles === 0 ? 'block' : 'none';
+        }
+    </script>
 </body>
 </html>

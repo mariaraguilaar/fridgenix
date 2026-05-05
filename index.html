@@ -4,147 +4,279 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FRIDGENIX - Inicio</title>
-    <!-- Tailwind CSS para el diseño -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome para los iconos -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-    </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 
-    <!-- CABECERA PRINCIPAL -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div class="container mx-auto px-4 h-20 flex items-center justify-between">
-            
-            <!-- Zona del Logo -->
             <a href="index.html" class="flex items-center gap-2 group">
                 <img src="logo.png" alt="Logo Fridgenix" class="h-10 w-auto group-hover:scale-105 transition-transform">
                 <span class="text-2xl font-black tracking-tighter text-blue-600">FRIDGENIX</span>
             </a>
-
-            <!-- Buscador -->
             <div class="hidden md:flex flex-1 max-w-md mx-8">
                 <div class="relative w-full">
-                    <input type="text" placeholder="Buscar alimentos, recetas..." class="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 outline-none focus:ring-2 focus:ring-blue-400 transition-all">
+                    <input type="text" id="buscador-inicio" onkeyup="filtrarBuscador()" placeholder="Buscar en mi nevera..." class="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 outline-none focus:ring-2 focus:ring-blue-400">
                     <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400"></i>
                 </div>
             </div>
-
-            <!-- Login / Registro -->
             <div class="flex items-center gap-4">
-                <a href="registro.html" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">
-                    <i class="fa-regular fa-user mr-1"></i> Registro / Login
-                </a>
+                <a href="registro.html" class="text-slate-600 hover:text-blue-600 font-medium"><i class="fa-regular fa-user mr-1"></i> Registro / Login</a>
             </div>
         </div>
     </header>
 
-    <!-- MENÚ DE NAVEGACIÓN PRINCIPAL -->
     <nav class="bg-blue-600 text-white sticky top-20 z-40 shadow-md">
         <div class="container mx-auto px-4 overflow-x-auto">
             <ul class="flex items-center space-x-8 py-3 whitespace-nowrap">
-                <li><a href="index.html" class="font-semibold border-b-2 border-white pb-1"><i class="fa-solid fa-house text-sm"></i> Inicio</a></li>
-                <li><a href="inventario.html" class="hover:text-blue-200 transition-colors">Mi Inventario</a></li>
-                <li><a href="recetas.html" class="hover:text-blue-200 transition-colors">Recetas Inteligentes</a></li>
-                <li><a href="listas.html" class="hover:text-blue-200 transition-colors">Listas de Compra</a></li>
-                <li><a href="contacto.html" class="hover:text-blue-200 transition-colors">Contacto</a></li>
+                <li><a href="index.html" class="font-semibold border-b-2 border-white pb-1">Inicio</a></li>
+                <li><a href="inventario.html" class="hover:text-blue-200">Mi Inventario</a></li>
+                <li><a href="recetas.html" class="hover:text-blue-200">Recetas</a></li>
+                <li><a href="listas.html" class="hover:text-blue-200">Listas</a></li>
+                <li><a href="estadisticas.html" class="hover:text-blue-200">Estadísticas</a></li>
+                <li><a href="contacto.html" class="hover:text-blue-200">Contacto</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <main class="container mx-auto px-4 py-8 flex-grow">
         <div class="flex flex-col md:flex-row gap-8">
-            
-            <!-- Columna Izquierda: Menú Secundario / Categorías -->
+            <!-- Menú Categorías -->
             <aside class="w-full md:w-1/4 lg:w-1/5">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 sticky top-40">
-                    <h3 class="text-lg font-bold mb-4 text-slate-700 flex items-center gap-2">
-                        <i class="fa-solid fa-filter text-blue-500"></i> Categorías
-                    </h3>
-                    <ul class="space-y-1">
-                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">🥛 Lácteos</a></li>
-                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">🥩 Carnes</a></li>
-                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">🐟 Pescados</a></li>
-                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">🥦 Verduras</a></li>
-                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">🍎 Frutas</a></li>
-                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">📦 Despensa</a></li>
-                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">❄️ Congelados</a></li>
-                        <li><a href="inventario.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">🧃 Bebidas</a></li>
+                <div class="bg-white p-6 rounded-2xl shadow-sm sticky top-40">
+                    <h3 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-filter text-blue-500"></i> 10 Categorías</h3>
+                    <ul class="space-y-1" id="menu-categorias">
+                        <li><button onclick="filtrarCategoria('todas')" class="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 font-bold text-blue-600">🍽️ Mostrar Todo</button></li>
+                        <li><button onclick="filtrarCategoria('lacteos')" class="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50">🥛 Lácteos</button></li>
+                        <li><button onclick="filtrarCategoria('carnes')" class="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50">🥩 Carnes</button></li>
+                        <li><button onclick="filtrarCategoria('pescados')" class="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50">🐟 Pescados</button></li>
+                        <li><button onclick="filtrarCategoria('verduras')" class="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50">🥦 Verduras</button></li>
+                        <li><button onclick="filtrarCategoria('frutas')" class="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50">🍎 Frutas</button></li>
+                        <li><button onclick="filtrarCategoria('bebidas')" class="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50">🥤 Bebidas</button></li>
+                        <li><button onclick="filtrarCategoria('congelados')" class="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50">❄️ Congelados</button></li>
+                        <li><button onclick="filtrarCategoria('panaderia')" class="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50">🍞 Panadería</button></li>
+                        <li><button onclick="filtrarCategoria('salsas')" class="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50">🫙 Salsas/Especias</button></li>
+                        <li><button onclick="filtrarCategoria('snacks')" class="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50">🍿 Snacks</button></li>
                     </ul>
                 </div>
             </aside>
 
-            <!-- Columna Derecha: Contenido y Alertas -->
             <section class="w-full md:w-3/4 lg:w-4/5">
+                <h1 class="text-3xl font-extrabold mb-6">Tu Nevera Rápida (35+ Ingredientes)</h1>
+                <p id="mensaje-vacio" class="hidden text-slate-500 italic bg-slate-100 p-4 rounded-lg">No se han encontrado ingredientes con esa búsqueda.</p>
                 
-                <!-- Título de la página -->
-                <div class="mb-8">
-                    <h1 class="text-3xl font-extrabold text-slate-800">Resumen de tu Nevera</h1>
-                    <p class="text-slate-500">Tienes 24 artículos en total. 2 necesitan tu atención prioritaria.</p>
-                </div>
-                
-                <!-- Banner Premium -->
-                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-8 rounded-3xl shadow-xl mb-10 overflow-hidden relative">
-                    <div class="relative z-10">
-                        <h2 class="text-2xl font-bold mb-2">¡Pásate a FRIDGENIX Premium!</h2>
-                        <p class="mb-6 text-blue-100 max-w-md">Desbloquea recetas personalizadas y listas automáticas por solo 2,99€/mes.</p>
-                        <a href="premium.html" class="inline-block bg-white text-blue-700 px-6 py-3 rounded-full font-bold hover:bg-blue-50 shadow-lg transition-transform hover:scale-105">
-                            Obtener Premium ahora
-                        </a>
+                <!-- Cuadrícula filtrable -->
+                <div id="contenedor-items" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+                    
+                    <!-- LÁCTEOS -->
+                    <div class="item-nevera bg-white border-l-4 border-red-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="lacteos" data-nombre="leche entera">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🥛</div><div><h4 class="font-bold">Leche entera</h4><p class="text-sm text-red-600 font-medium">Caduca hoy</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
                     </div>
-                    <!-- Decoración del banner -->
+                    <div class="item-nevera bg-white border-l-4 border-amber-400 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="lacteos" data-nombre="queso cheddar">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🧀</div><div><h4 class="font-bold">Queso Cheddar</h4><p class="text-sm text-amber-600 font-medium">Caduca en 3 días</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="lacteos" data-nombre="yogur griego">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🍦</div><div><h4 class="font-bold">Yogur Griego</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="lacteos" data-nombre="mantequilla sin sal">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🧈</div><div><h4 class="font-bold">Mantequilla</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+
+                    <!-- CARNES -->
+                    <div class="item-nevera bg-white border-l-4 border-amber-400 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="carnes" data-nombre="pechuga de pollo">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🍗</div><div><h4 class="font-bold">Pechuga de pollo</h4><p class="text-sm text-amber-600 font-medium">Caduca en 2 días</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="carnes" data-nombre="filete de ternera">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🥩</div><div><h4 class="font-bold">Filete de ternera</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-red-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="carnes" data-nombre="salchichas frescas">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🌭</div><div><h4 class="font-bold">Salchichas</h4><p class="text-sm text-red-600 font-medium">Caduca hoy</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="carnes" data-nombre="chuletas de cerdo">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🐷</div><div><h4 class="font-bold">Chuletas cerdo</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+
+                    <!-- PESCADOS -->
+                    <div class="item-nevera bg-white border-l-4 border-amber-400 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="pescados" data-nombre="salmon fresco">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🐟</div><div><h4 class="font-bold">Salmón fresco</h4><p class="text-sm text-amber-600 font-medium">Caduca en 2 días</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="pescados" data-nombre="gambas cocidas">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🦐</div><div><h4 class="font-bold">Gambas cocidas</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-red-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="pescados" data-nombre="merluza en rodajas">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🐠</div><div><h4 class="font-bold">Merluza</h4><p class="text-sm text-red-600 font-medium">Caduca hoy</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+
+                    <!-- VERDURAS -->
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="verduras" data-nombre="tomates rama">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🍅</div><div><h4 class="font-bold">Tomates Rama</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="verduras" data-nombre="lechuga iceberg">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🥬</div><div><h4 class="font-bold">Lechuga Iceberg</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-amber-400 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="verduras" data-nombre="espinacas baby">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🌿</div><div><h4 class="font-bold">Espinacas</h4><p class="text-sm text-amber-600 font-medium">Consumir pronto</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="verduras" data-nombre="zanahorias">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🥕</div><div><h4 class="font-bold">Zanahorias</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="verduras" data-nombre="cebolla morada">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🧅</div><div><h4 class="font-bold">Cebolla morada</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+
+                    <!-- FRUTAS -->
+                    <div class="item-nevera bg-white border-l-4 border-orange-400 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="frutas" data-nombre="plátanos de canarias">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🍌</div><div><h4 class="font-bold">Plátanos</h4><p class="text-sm text-amber-600 font-medium">Madurando</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="frutas" data-nombre="manzanas golden">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🍎</div><div><h4 class="font-bold">Manzanas</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-red-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="frutas" data-nombre="fresas">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🍓</div><div><h4 class="font-bold">Fresas</h4><p class="text-sm text-red-600 font-medium">Muy maduras</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="frutas" data-nombre="kiwis">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🥝</div><div><h4 class="font-bold">Kiwis</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+
+                    <!-- BEBIDAS -->
+                    <div class="item-nevera bg-white border-l-4 border-blue-400 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="bebidas" data-nombre="zumo de naranja natural">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🧃</div><div><h4 class="font-bold">Zumo Naranja</h4><p class="text-sm text-blue-600 font-medium">Abierto</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="bebidas" data-nombre="leche de almendras">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🥛</div><div><h4 class="font-bold">Leche Almendras</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="bebidas" data-nombre="cerveza artesanal">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🍺</div><div><h4 class="font-bold">Cerveza</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+
+                    <!-- CONGELADOS -->
+                    <div class="item-nevera bg-white border-l-4 border-cyan-400 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="congelados" data-nombre="pizza congelada">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🍕</div><div><h4 class="font-bold">Pizza Congelada</h4><p class="text-sm text-cyan-600 font-medium">Congelado</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-cyan-400 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="congelados" data-nombre="guisantes congelados">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🟢</div><div><h4 class="font-bold">Guisantes</h4><p class="text-sm text-cyan-600 font-medium">Congelado</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-cyan-400 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="congelados" data-nombre="helado de vainilla">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🍨</div><div><h4 class="font-bold">Helado Vainilla</h4><p class="text-sm text-cyan-600 font-medium">Congelado</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+
+                    <!-- PANADERÍA -->
+                    <div class="item-nevera bg-white border-l-4 border-amber-400 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="panaderia" data-nombre="pan de molde">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🍞</div><div><h4 class="font-bold">Pan de Molde</h4><p class="text-sm text-amber-600 font-medium">Consumir pronto</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="panaderia" data-nombre="croissants">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🥐</div><div><h4 class="font-bold">Croissants</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+
+                    <!-- SALSAS / ESPECIAS -->
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="salsas" data-nombre="ketchup">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🍅</div><div><h4 class="font-bold">Ketchup</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="salsas" data-nombre="mayonesa">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🫙</div><div><h4 class="font-bold">Mayonesa</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+
+                    <!-- SNACKS -->
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="snacks" data-nombre="patatas fritas">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🍟</div><div><h4 class="font-bold">Patatas Fritas</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                    <div class="item-nevera bg-white border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between transition-all duration-300" data-categoria="snacks" data-nombre="frutos secos">
+                        <div class="flex items-center gap-4"><div class="text-3xl">🥜</div><div><h4 class="font-bold">Frutos Secos</h4><p class="text-sm text-green-600 font-medium">Fresco</p></div></div>
+                        <button onclick="marcarComoConsumido(this)" class="text-slate-400 hover:text-green-500"><i class="fa-solid fa-circle-check text-2xl"></i></button>
+                    </div>
+                </div>
+
+                <!-- Banner Premium ABAJO -->
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-8 rounded-3xl shadow-xl overflow-hidden relative mt-12">
+                    <div class="relative z-10 text-center md:text-left">
+                        <h2 class="text-2xl font-bold mb-2">¡Pásate a FRIDGENIX Premium!</h2>
+                        <p class="mb-6 text-blue-100 max-w-md mx-auto md:mx-0">Desbloquea recetas personalizadas y listas automáticas por solo 2,99€/mes.</p>
+                        <a href="premium.html" class="inline-block bg-white text-blue-700 px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform">Obtener Premium ahora</a>
+                    </div>
                     <div class="absolute -right-10 -top-10 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
                 </div>
-
-                <!-- Sección de Alertas de Caducidad -->
-                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Alertas de Caducidad
-                </h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Tarjeta Alerta 1 -->
-                    <div class="bg-white border-l-4 border-red-500 p-5 rounded-r-xl shadow-sm hover:shadow-md transition-shadow flex items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <div class="text-3xl">🥛</div>
-                            <div>
-                                <h4 class="font-bold text-slate-800">Leche entera</h4>
-                                <p class="text-sm text-red-600 font-medium">Caduca hoy</p>
-                            </div>
-                        </div>
-                        <button onclick="alert('¡Producto marcado como consumido! Se ha eliminado de tu inventario.')" class="text-slate-400 hover:text-green-500 transition-colors">
-                            <i class="fa-solid fa-circle-check text-2xl"></i>
-                        </button>
-                    </div>
-
-                    <!-- Tarjeta Alerta 2 -->
-                    <div class="bg-white border-l-4 border-amber-400 p-5 rounded-r-xl shadow-sm hover:shadow-md transition-shadow flex items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <div class="text-3xl">🍗</div>
-                            <div>
-                                <h4 class="font-bold text-slate-800">Pechuga de pollo</h4>
-                                <p class="text-sm text-amber-600 font-medium">Caduca en 2 días</p>
-                            </div>
-                        </div>
-                        <button onclick="alert('¡Producto marcado como consumido! Se ha eliminado de tu inventario.')" class="text-slate-400 hover:text-green-500 transition-colors">
-                            <i class="fa-solid fa-circle-check text-2xl"></i>
-                        </button>
-                    </div>
-                </div>
-
             </section>
         </div>
     </main>
 
-    <!-- PIE DE PÁGINA (FOOTER) -->
-    <footer class="bg-slate-900 text-slate-300 pt-12 pb-6 mt-12">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2026 FRIDGENIX S.L. | Av. de la Innovación 45, Córdoba | Tel: 900 123 456</p>
-        </div>
-    </footer>
+    <!-- SCRIPT DEL MOTOR DE BÚSQUEDA Y ALERTAS -->
+    <script>
+        function marcarComoConsumido(boton) {
+            let tarjeta = boton.closest('.item-nevera');
+            tarjeta.style.transition = 'all 0.3s ease';
+            tarjeta.style.opacity = '0';
+            tarjeta.style.transform = 'scale(0.9)';
+            setTimeout(() => { 
+                tarjeta.remove(); 
+                if (document.querySelectorAll('.item-nevera[style*="display: flex"], .item-nevera:not([style*="display: none"])').length === 0) {
+                    document.getElementById('mensaje-vacio').style.display = 'block';
+                }
+            }, 300);
+        }
 
+        function filtrarCategoria(categoria) {
+            let items = document.querySelectorAll('.item-nevera');
+            let mensajeVacio = document.getElementById('mensaje-vacio');
+            let visibles = 0;
+            items.forEach(item => {
+                if (categoria === 'todas' || item.getAttribute('data-categoria') === categoria) {
+                    item.style.display = 'flex';
+                    visibles++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            mensajeVacio.style.display = visibles === 0 ? 'block' : 'none';
+        }
+
+        function filtrarBuscador() {
+            let input = document.getElementById('buscador-inicio').value.toLowerCase().trim();
+            let items = document.querySelectorAll('.item-nevera');
+            let mensajeVacio = document.getElementById('mensaje-vacio');
+            let visibles = 0;
+            items.forEach(item => {
+                let nombre = item.getAttribute('data-nombre').toLowerCase();
+                if (nombre.includes(input)) {
+                    item.style.display = 'flex';
+                    visibles++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            mensajeVacio.style.display = visibles === 0 ? 'block' : 'none';
+        }
+    </script>
 </body>
 </html>
