@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRIDGENIX - Inventario</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+        #mobile-menu.open { max-height: 500px; }
+        .prod-card { transition: transform 0.3s ease, opacity 0.3s ease; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- CABECERA -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <img src="logo.png" alt="Logo" class="h-8 w-auto">
+                <span class="text-xl font-black tracking-tighter text-blue-600">FRIDGENIX</span>
+            </a>
+            <button id="btn-hamburguesa" onclick="toggleMenu()"
+                class="text-slate-700 w-10 h-10 flex items-center justify-center rounded-lg hover:bg-slate-100">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+        <div class="px-4 pb-3">
+            <div class="relative">
+                <input type="text" id="buscador-inv" onkeyup="filtrarInventario()"
+                    placeholder="Filtrar inventario..."
+                    class="w-full bg-slate-100 rounded-full py-2.5 pl-10 pr-4 text-sm outline-none focus:ring-2 focus:ring-blue-400">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-sm"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- MENÚ HAMBURGUESA -->
+    <nav id="mobile-menu" class="bg-blue-600 text-white z-40 shadow-md">
+        <ul class="flex flex-col divide-y divide-blue-500">
+            <li><a href="index.html" class="px-5 py-3 hover:bg-blue-700 transition flex items-center gap-2 min-h-[48px]">🏠 Inicio</a></li>
+            <li><a href="inventario.html" class="px-5 py-3 bg-blue-700 font-semibold flex items-center gap-2 min-h-[48px]">📦 Mi Inventario</a></li>
+            <li><a href="recetas.html" class="px-5 py-3 hover:bg-blue-700 transition flex items-center gap-2 min-h-[48px]">🍳 Recetas</a></li>
+            <li><a href="listas.html" class="px-5 py-3 hover:bg-blue-700 transition flex items-center gap-2 min-h-[48px]">🛒 Listas de Compra</a></li>
+            <li><a href="estadisticas.html" class="px-5 py-3 hover:bg-blue-700 transition flex items-center gap-2 min-h-[48px]">📊 Estadísticas</a></li>
+            <li><a href="contacto.html" class="px-5 py-3 hover:bg-blue-700 transition flex items-center gap-2 min-h-[48px]">✉️ Contacto</a></li>
+            <li><a href="registro.html" class="px-5 py-3 hover:bg-blue-700 transition flex items-center gap-2 min-h-[48px]">👤 Registro / Login</a></li>
+        </ul>
+    </nav>
+
+    <main class="px-4 py-6 flex-grow pb-24">
+        <div class="flex items-center justify-between mb-5">
+            <h1 class="text-2xl font-extrabold">Inventario</h1>
+            <div class="flex gap-2">
+                <button onclick="añadirManual()"
+                    class="bg-white border-2 border-slate-300 px-3 py-2.5 rounded-lg font-bold text-sm hover:bg-slate-100 min-h-[48px]">
+                    <i class="fa-solid fa-plus mr-1"></i> Añadir
+                </button>
+                <button onclick="escanearProducto()"
+                    class="bg-green-500 text-white px-3 py-2.5 rounded-lg font-bold text-sm hover:bg-green-600 min-h-[48px]">
+                    <i class="fa-solid fa-barcode mr-1"></i> Escanear
+                </button>
+            </div>
+        </div>
+
+        <p id="msg-vacio" class="hidden text-slate-500 text-center mb-4 bg-slate-100 p-4 rounded-lg text-sm">No se encontraron productos.</p>
+
+        <!--
+            DECISIÓN DE USABILIDAD:
+            En escritorio usamos grid de 5-6 columnas con tarjetas cuadradas.
+            En móvil usamos grid de 2 columnas: suficiente espacio para el emoji,
+            nombre y cantidad sin que se corten textos ni se vean aplastadas.
+        -->
+        <div id="grid-inventario" class="grid grid-cols-2 gap-3">
+
+            <!-- LÁCTEOS -->
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-blue-300 shadow-sm text-center" data-nom="leche entera">
+                <div class="text-4xl mb-2">🥛</div><h3 class="font-bold text-sm">Leche Entera</h3><p class="text-xs text-slate-500">1L</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-yellow-400 shadow-sm text-center" data-nom="queso cheddar">
+                <div class="text-4xl mb-2">🧀</div><h3 class="font-bold text-sm">Queso Cheddar</h3><p class="text-xs text-slate-500">200g</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-blue-300 shadow-sm text-center" data-nom="yogur griego">
+                <div class="text-4xl mb-2">🍦</div><h3 class="font-bold text-sm">Yogur Griego</h3><p class="text-xs text-slate-500">Pack 4</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-yellow-400 shadow-sm text-center" data-nom="mantequilla">
+                <div class="text-4xl mb-2">🧈</div><h3 class="font-bold text-sm">Mantequilla</h3><p class="text-xs text-slate-500">250g</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-blue-300 shadow-sm text-center" data-nom="nata para cocinar">
+                <div class="text-4xl mb-2">🥛</div><h3 class="font-bold text-sm">Nata Cocinar</h3><p class="text-xs text-slate-500">200ml</p>
+            </div>
+
+            <!-- CARNES -->
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-red-400 shadow-sm text-center" data-nom="pechuga de pollo">
+                <div class="text-4xl mb-2">🍗</div><h3 class="font-bold text-sm">Pechuga Pollo</h3><p class="text-xs text-slate-500">500g</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-red-400 shadow-sm text-center" data-nom="filete de ternera">
+                <div class="text-4xl mb-2">🥩</div><h3 class="font-bold text-sm">Filete Ternera</h3><p class="text-xs text-slate-500">2 uds</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-red-400 shadow-sm text-center" data-nom="salchichas">
+                <div class="text-4xl mb-2">🌭</div><h3 class="font-bold text-sm">Salchichas</h3><p class="text-xs text-slate-500">Pack 6</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-red-400 shadow-sm text-center" data-nom="chuletas de cerdo">
+                <div class="text-4xl mb-2">🐷</div><h3 class="font-bold text-sm">Chuletas Cerdo</h3><p class="text-xs text-slate-500">4 uds</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-red-400 shadow-sm text-center" data-nom="pavo molido">
+                <div class="text-4xl mb-2">🦃</div><h3 class="font-bold text-sm">Pavo Molido</h3><p class="text-xs text-slate-500">300g</p>
+            </div>
+
+            <!-- PESCADOS -->
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-cyan-400 shadow-sm text-center" data-nom="salmon fresco">
+                <div class="text-4xl mb-2">🐟</div><h3 class="font-bold text-sm">Salmón Fresco</h3><p class="text-xs text-slate-500">300g</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-cyan-400 shadow-sm text-center" data-nom="gambas">
+                <div class="text-4xl mb-2">🦐</div><h3 class="font-bold text-sm">Gambas</h3><p class="text-xs text-slate-500">250g</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-cyan-400 shadow-sm text-center" data-nom="merluza">
+                <div class="text-4xl mb-2">🐠</div><h3 class="font-bold text-sm">Merluza</h3><p class="text-xs text-slate-500">2 rodajas</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-cyan-400 shadow-sm text-center" data-nom="atun en lata">
+                <div class="text-4xl mb-2">🥫</div><h3 class="font-bold text-sm">Atún Lata</h3><p class="text-xs text-slate-500">3 uds</p>
+            </div>
+
+            <!-- VERDURAS -->
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-green-500 shadow-sm text-center" data-nom="tomates">
+                <div class="text-4xl mb-2">🍅</div><h3 class="font-bold text-sm">Tomates</h3><p class="text-xs text-slate-500">6 uds</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-green-500 shadow-sm text-center" data-nom="lechuga">
+                <div class="text-4xl mb-2">🥬</div><h3 class="font-bold text-sm">Lechuga</h3><p class="text-xs text-slate-500">1 ud</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-green-500 shadow-sm text-center" data-nom="espinacas">
+                <div class="text-4xl mb-2">🌿</div><h3 class="font-bold text-sm">Espinacas</h3><p class="text-xs text-slate-500">Bolsa</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-orange-400 shadow-sm text-center" data-nom="zanahorias">
+                <div class="text-4xl mb-2">🥕</div><h3 class="font-bold text-sm">Zanahorias</h3><p class="text-xs text-slate-500">1kg</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-purple-400 shadow-sm text-center" data-nom="cebolla">
+                <div class="text-4xl mb-2">🧅</div><h3 class="font-bold text-sm">Cebolla</h3><p class="text-xs text-slate-500">4 uds</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-green-500 shadow-sm text-center" data-nom="pimiento rojo">
+                <div class="text-4xl mb-2">🫑</div><h3 class="font-bold text-sm">Pimiento Rojo</h3><p class="text-xs text-slate-500">2 uds</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-green-500 shadow-sm text-center" data-nom="brocoli">
+                <div class="text-4xl mb-2">🥦</div><h3 class="font-bold text-sm">Brócoli</h3><p class="text-xs text-slate-500">1 ud</p>
+            </div>
+
+            <!-- FRUTAS -->
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-yellow-300 shadow-sm text-center" data-nom="platanos">
+                <div class="text-4xl mb-2">🍌</div><h3 class="font-bold text-sm">Plátanos</h3><p class="text-xs text-slate-500">5 uds</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-red-300 shadow-sm text-center" data-nom="manzanas">
+                <div class="text-4xl mb-2">🍎</div><h3 class="font-bold text-sm">Manzanas</h3><p class="text-xs text-slate-500">6 uds</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-red-500 shadow-sm text-center" data-nom="fresas">
+                <div class="text-4xl mb-2">🍓</div><h3 class="font-bold text-sm">Fresas</h3><p class="text-xs text-slate-500">500g</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-green-400 shadow-sm text-center" data-nom="kiwis">
+                <div class="text-4xl mb-2">🥝</div><h3 class="font-bold text-sm">Kiwis</h3><p class="text-xs text-slate-500">4 uds</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-orange-500 shadow-sm text-center" data-nom="naranjas">
+                <div class="text-4xl mb-2">🍊</div><h3 class="font-bold text-sm">Naranjas</h3><p class="text-xs text-slate-500">2kg</p>
+            </div>
+
+            <!-- BEBIDAS -->
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-sky-400 shadow-sm text-center" data-nom="zumo de naranja">
+                <div class="text-4xl mb-2">🧃</div><h3 class="font-bold text-sm">Zumo Naranja</h3><p class="text-xs text-slate-500">1L</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-sky-400 shadow-sm text-center" data-nom="leche de almendras">
+                <div class="text-4xl mb-2">🥛</div><h3 class="font-bold text-sm">Leche Almendras</h3><p class="text-xs text-slate-500">1L</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-amber-400 shadow-sm text-center" data-nom="cerveza">
+                <div class="text-4xl mb-2">🍺</div><h3 class="font-bold text-sm">Cerveza</h3><p class="text-xs text-slate-500">6 pack</p>
+            </div>
+
+            <!-- CONGELADOS -->
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-slate-400 shadow-sm text-center" data-nom="pizza congelada">
+                <div class="text-4xl mb-2">🍕</div><h3 class="font-bold text-sm">Pizza Cong.</h3><p class="text-xs text-slate-500">2 uds</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-slate-400 shadow-sm text-center" data-nom="guisantes">
+                <div class="text-4xl mb-2">🟢</div><h3 class="font-bold text-sm">Guisantes</h3><p class="text-xs text-slate-500">Bolsa</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-slate-400 shadow-sm text-center" data-nom="helado">
+                <div class="text-4xl mb-2">🍨</div><h3 class="font-bold text-sm">Helado</h3><p class="text-xs text-slate-500">1L</p>
+            </div>
+
+            <!-- PANADERÍA -->
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-amber-300 shadow-sm text-center" data-nom="pan de molde">
+                <div class="text-4xl mb-2">🍞</div><h3 class="font-bold text-sm">Pan Molde</h3><p class="text-xs text-slate-500">1 paquete</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-amber-300 shadow-sm text-center" data-nom="croissants">
+                <div class="text-4xl mb-2">🥐</div><h3 class="font-bold text-sm">Croissants</h3><p class="text-xs text-slate-500">4 uds</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-amber-300 shadow-sm text-center" data-nom="baguette">
+                <div class="text-4xl mb-2">🥖</div><h3 class="font-bold text-sm">Baguette</h3><p class="text-xs text-slate-500">1 ud</p>
+            </div>
+
+            <!-- SALSAS -->
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-red-300 shadow-sm text-center" data-nom="ketchup">
+                <div class="text-4xl mb-2">🍅</div><h3 class="font-bold text-sm">Ketchup</h3><p class="text-xs text-slate-500">500ml</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-yellow-200 shadow-sm text-center" data-nom="mayonesa">
+                <div class="text-4xl mb-2">🫙</div><h3 class="font-bold text-sm">Mayonesa</h3><p class="text-xs text-slate-500">450ml</p>
+            </div>
+
+            <!-- SNACKS -->
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-yellow-500 shadow-sm text-center" data-nom="patatas fritas">
+                <div class="text-4xl mb-2">🍟</div><h3 class="font-bold text-sm">Patatas Fritas</h3><p class="text-xs text-slate-500">Bolsa</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-yellow-500 shadow-sm text-center" data-nom="frutos secos">
+                <div class="text-4xl mb-2">🥜</div><h3 class="font-bold text-sm">Frutos Secos</h3><p class="text-xs text-slate-500">250g</p>
+            </div>
+            <div class="prod-card bg-white p-4 rounded-xl border-t-4 border-yellow-500 shadow-sm text-center" data-nom="galletas">
+                <div class="text-4xl mb-2">🍪</div><h3 class="font-bold text-sm">Galletas</h3><p class="text-xs text-slate-500">Paquete</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- NAV INFERIOR -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-50 flex justify-around items-center h-16 shadow-lg">
+        <a href="index.html" class="flex flex-col items-center text-slate-400 text-xs gap-0.5"><i class="fa-solid fa-house text-lg"></i><span>Inicio</span></a>
+        <a href="inventario.html" class="flex flex-col items-center text-blue-600 text-xs font-medium gap-0.5"><i class="fa-solid fa-box-open text-lg"></i><span>Inventario</span></a>
+        <a href="recetas.html" class="flex flex-col items-center text-slate-400 text-xs gap-0.5"><i class="fa-solid fa-utensils text-lg"></i><span>Recetas</span></a>
+        <a href="listas.html" class="flex flex-col items-center text-slate-400 text-xs gap-0.5"><i class="fa-solid fa-cart-shopping text-lg"></i><span>Lista</span></a>
+        <a href="estadisticas.html" class="flex flex-col items-center text-slate-400 text-xs gap-0.5"><i class="fa-solid fa-chart-bar text-lg"></i><span>Stats</span></a>
+    </nav>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.querySelector('#btn-hamburguesa i');
+            menu.classList.toggle('open');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+
+        function añadirManual() {
+            let nombre = prompt("Introduce el nombre del producto:");
+            if (nombre && nombre.trim() !== "") { crearTarjeta("📦", nombre.trim(), "Recién añadido", "border-slate-400"); }
+        }
+        function escanearProducto() {
+            let productos = ["Leche Semi", "Pan Integral", "Tomate Frito", "Pizza Congelada", "Huevos XL"];
+            let aleatorio = productos[Math.floor(Math.random() * productos.length)];
+            alert(`📸 ¡Bip! Código detectado: ${aleatorio}`);
+            crearTarjeta("🏷️", aleatorio, "Escaneado ahora", "border-cyan-400");
+        }
+        function crearTarjeta(emoji, titulo, desc, borde) {
+            let grid = document.getElementById('grid-inventario');
+            let div = document.createElement('div');
+            div.className = `prod-card bg-white p-4 rounded-xl border-t-4 ${borde} shadow-sm text-center opacity-0 transition-opacity duration-300`;
+            div.setAttribute('data-nom', titulo.toLowerCase());
+            div.innerHTML = `<div class="text-4xl mb-2">${emoji}</div><h3 class="font-bold text-sm">${titulo}</h3><p class="text-xs text-slate-500">${desc}</p>`;
+            grid.insertBefore(div, grid.firstChild);
+            setTimeout(() => div.classList.remove('opacity-0'), 50);
+        }
+        function filtrarInventario() {
+            let txt = document.getElementById('buscador-inv').value.toLowerCase().trim();
+            let cards = document.querySelectorAll('.prod-card');
+            let visibles = 0;
+            cards.forEach(c => {
+                if (c.getAttribute('data-nom').includes(txt)) { c.style.display = 'block'; visibles++; }
+                else { c.style.display = 'none'; }
+            });
+            document.getElementById('msg-vacio').style.display = visibles === 0 ? 'block' : 'none';
+        }
+    </script>
+<script>/* forzar-reflow */document.addEventListener("DOMContentLoaded",function(){document.body.style.display="none";void document.body.offsetHeight;document.body.style.display="";});</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRIDGENIX - Listas de Compra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+        #mobile-menu.open { max-height: 500px; }
+        .item-compra { cursor: pointer; transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <img src="logo.png" alt="Logo" class="h-8 w-auto">
+                <span class="text-xl font-black tracking-tighter text-blue-600">FRIDGENIX</span>
+            </a>
+            <div class="flex items-center gap-2">
+                <!-- Botón compartir visible siempre en móvil -->
+                <button onclick="alert('📋 Lista compartida con tu familia.')"
+                    class="text-blue-600 w-10 h-10 flex items-center justify-center rounded-lg bg-blue-50">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </button>
+                <button id="btn-hamburguesa" onclick="toggleMenu()" class="text-slate-700 w-10 h-10 flex items-center justify-center rounded-lg hover:bg-slate-100">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <nav id="mobile-menu" class="bg-blue-600 text-white z-40 shadow-md">
+        <ul class="flex flex-col divide-y divide-blue-500">
+            <li><a href="index.html" class="px-5 py-3 hover:bg-blue-700 transition flex items-center gap-2 min-h-[48px]">🏠 Inicio</a></li>
+            <li><a href="inventario.html" class="px-5 py-3 hover:bg-blue-700 transition flex items-center gap-2 min-h-[48px]">📦 Mi Inventario</a></li>
+            <li><a href="recetas.html" class="px-5 py-3 hover:bg-blue-700 transition flex items-center gap-2 min-h-[48px]">🍳 Recetas</a></li>
+            <li><a href="listas.html" class="px-5 py-3 bg-blue-700 font-semibold flex items-center gap-2 min-h-[48px]">🛒 Listas de Compra</a></li>
+            <li><a href="estadisticas.html" class="px-5 py-3 hover:bg-blue-700 transition flex items-center gap-2 min-h-[48px]">📊 Estadísticas</a></li>
+            <li><a href="contacto.html" class="px-5 py-3 hover:bg-blue-700 transition flex items-center gap-2 min-h-[48px]">✉️ Contacto</a></li>
+        </ul>
+    </nav>
+
+    <main class="px-4 py-6 flex-grow pb-24">
+        <div class="mb-5">
+            <h1 class="text-2xl font-extrabold">Lista de Supermercado 🛒</h1>
+            <p class="text-slate-500 text-sm mt-1">Toca un producto para eliminarlo de la lista.</p>
+        </div>
+
+        <!-- Buscador móvil (en listas era solo desktop en el original) -->
+        <div class="relative mb-5">
+            <input type="text" id="buscador-lista" onkeyup="filtrarLista()"
+                placeholder="Buscar en la lista..."
+                class="w-full bg-slate-100 rounded-full py-2.5 pl-10 pr-4 text-sm outline-none focus:ring-2 focus:ring-blue-400">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-sm"></i>
+        </div>
+
+        <p id="lista-vacia" class="hidden text-center text-slate-400 italic py-8 bg-white rounded-xl text-sm">¡Lista vacía! Añade productos o genera una desde las recetas.</p>
+
+        <ul id="mi-lista-compra" class="space-y-3">
+            <li class="item-compra flex items-center gap-4 bg-white p-4 rounded-xl border border-slate-100 shadow-sm" onclick="eliminarDeLista(this)">
+                <div class="w-5 h-5 rounded-full border-2 border-slate-300 flex-shrink-0"></div>
+                <span class="text-base font-medium text-slate-700 flex-grow select-none">Mantequilla</span>
+                <span class="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-1 rounded-md">Por receta</span>
+            </li>
+            <li class="item-compra flex items-center gap-4 bg-white p-4 rounded-xl border border-slate-100 shadow-sm" onclick="eliminarDeLista(this)">
+                <div class="w-5 h-5 rounded-full border-2 border-slate-300 flex-shrink-0"></div>
+                <span class="text-base font-medium text-slate-700 flex-grow select-none">Aceite de Oliva</span>
+                <span class="text-xs font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded-md">Bajo stock</span>
+            </li>
+            <li class="item-compra flex items-center gap-4 bg-white p-4 rounded-xl border border-slate-100 shadow-sm" onclick="eliminarDeLista(this)">
+                <div class="w-5 h-5 rounded-full border-2 border-slate-300 flex-shrink-0"></div>
+                <span class="text-base font-medium text-slate-700 flex-grow select-none">Pan de Molde Integral</span>
+                <span class="text-xs font-bold text-slate-600 bg-slate-200 px-2 py-1 rounded-md">Manual</span>
+            </li>
+        </ul>
+
+        <!-- Botón añadir: ancho completo, altura táctil generosa -->
+        <button onclick="añadirProductoLista()"
+            class="mt-6 w-full bg-white text-slate-700 border-2 border-dashed border-slate-300 font-bold py-4 rounded-xl hover:bg-slate-50 transition-colors text-sm min-h-[56px]">
+            <i class="fa-solid fa-plus mr-2 text-blue-500"></i> Añadir producto
+        </button>
+    </main>
+
+    <!-- NAV INFERIOR -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-50 flex justify-around items-center h-16 shadow-lg">
+        <a href="index.html" class="flex flex-col items-center text-slate-400 text-xs gap-0.5"><i class="fa-solid fa-house text-lg"></i><span>Inicio</span></a>
+        <a href="inventario.html" class="flex flex-col items-center text-slate-400 text-xs gap-0.5"><i class="fa-solid fa-box-open text-lg"></i><span>Inventario</span></a>
+        <a href="recetas.html" class="flex flex-col items-center text-slate-400 text-xs gap-0.5"><i class="fa-solid fa-utensils text-lg"></i><span>Recetas</span></a>
+        <a href="listas.html" class="flex flex-col items-center text-blue-600 text-xs font-medium gap-0.5"><i class="fa-solid fa-cart-shopping text-lg"></i><span>Lista</span></a>
+        <a href="estadisticas.html" class="flex flex-col items-center text-slate-400 text-xs gap-0.5"><i class="fa-solid fa-chart-bar text-lg"></i><span>Stats</span></a>
+    </nav>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.querySelector('#btn-hamburguesa i');
+            menu.classList.toggle('open');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+        function eliminarDeLista(elemento) {
+            elemento.style.opacity = '0';
+            elemento.style.transform = 'translateX(20px)';
+            setTimeout(() => { elemento.remove(); comprobarListaVacia(); }, 300);
+        }
+        function añadirProductoLista() {
+            let nuevoProducto = prompt("¿Qué producto quieres añadir?");
+            if (nuevoProducto && nuevoProducto.trim() !== "") {
+                let lista = document.getElementById("mi-lista-compra");
+                let elemento = document.createElement("li");
+                elemento.className = "item-compra flex items-center gap-4 bg-white p-4 rounded-xl border border-slate-100 shadow-sm opacity-0";
+                elemento.setAttribute("onclick", "eliminarDeLista(this)");
+                elemento.innerHTML = `
+                    <div class="w-5 h-5 rounded-full border-2 border-slate-300 flex-shrink-0"></div>
+                    <span class="text-base font-medium text-slate-700 flex-grow select-none">${nuevoProducto.trim()}</span>
+                    <span class="text-xs font-bold text-slate-500 bg-slate-200 px-2 py-1 rounded-md">Manual</span>
+                `;
+                lista.appendChild(elemento);
+                setTimeout(() => { elemento.style.opacity = '1'; elemento.style.transition = 'opacity 0.3s'; }, 50);
+                document.getElementById('lista-vacia').classList.add('hidden');
+            }
+        }
+        function filtrarLista() {
+            let texto = document.getElementById('buscador-lista').value.toLowerCase();
+            let items = document.querySelectorAll('#mi-lista-compra .item-compra');
+            let algunoVisible = false;
+            items.forEach(item => {
+                let nombre = item.querySelector('span:first-of-type').textContent.toLowerCase();
+                if (nombre.includes(texto)) { item.style.display = 'flex'; algunoVisible = true; }
+                else { item.style.display = 'none'; }
+            });
+            comprobarListaVacia(algunoVisible);
+        }
+        function comprobarListaVacia(forzar = null) {
+            let items = document.querySelectorAll('#mi-lista-compra .item-compra');
+            let alguno = forzar !== null ? forzar : Array.from(items).some(i => i.style.display !== 'none');
+            document.getElementById('lista-vacia').classList.toggle('hidden', alguno || items.length > 0);
+        }
+    </script>
+<script>/* forzar-reflow */document.addEventListener("DOMContentLoaded",function(){document.body.style.display="none";void document.body.offsetHeight;document.body.style.display="";});</script>
+</body>
+</html>
